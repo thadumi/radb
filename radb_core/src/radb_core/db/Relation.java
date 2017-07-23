@@ -24,6 +24,8 @@ import static java.util.Objects.*;
 import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static java.util.stream.Collectors.*;
 import static java.util.stream.Stream.*;
 import javafx.util.Pair;
@@ -45,7 +47,7 @@ public class Relation implements Cloneable {
         this.header = requireNonNull(header, "The header can't be null");
         this.content = requireNonNull(content, "The content can't be null");
     }
-    
+
     public Relation(Header header, Content content) {
         this("unnamed", header, content);
     }
@@ -94,7 +96,9 @@ public class Relation implements Cloneable {
     }
 
     public Relation projection(List<String> attributes) throws RelationalAlgebraException {
-        if (attributes.isEmpty()) return null;
+        if (attributes.isEmpty()) {
+            return null;
+        }
 
         List<Integer> ids = header.getAttributesIndex(attributes);
 
@@ -107,13 +111,24 @@ public class Relation implements Cloneable {
         Content c = new Content();
         content.stream()
                 .map(row
-                    -> ids.stream().map(i -> row.get(i)).collect(toList()))
+                        -> ids.stream().map(i -> row.get(i)).collect(toList()))
                 .forEach(c::add);
-        
 
         return new Relation(header, content);
     }
 
+     public Relation intersection(Relation other) throws RelationalAlgebraException {
+         other = rearrange(other);
+         
+         if(!header.equals(other.header))
+             RelationalAlgebraException.throwError("Unable to perform intersection on relations with different attributes");
+         
+         Header h = new Header(header.getAttributes());
+         Content c = content.intersection(other.content);
+         
+         return new Relation(h, c);
+     }
+     
     //relation.operator().sum(other).sum(other).valuate();
     /**
      * Returns a list with numeric index corresponding to field's name
@@ -129,6 +144,20 @@ public class Relation implements Cloneable {
         List<Integer> index = header.getAttributesIndex(attribute);
 
         return index.isEmpty() ? -1 : index.get(0);
+    }
+
+    private Relation rearrange(Relation other) {
+        long sharedAttributes = header.sharedAttributes(other.header);
+
+        if (sharedAttributes == header.getAttributes().size() && sharedAttributes == other.header.getAttributes().size()) {
+            try {
+                return other.projection(header.getAttributes());
+            } catch (RelationalAlgebraException ex) {
+                return null;
+            }
+        } else {
+            return null;
+        }
     }
 
     @Override
