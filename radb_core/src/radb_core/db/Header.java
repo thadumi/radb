@@ -18,6 +18,8 @@ package radb_core.db;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
@@ -63,7 +65,11 @@ public class Header implements Cloneable {
      */
     public boolean rename(String _old, String _new) {
         int index = attributes.indexOf(_old);
-        return attributes.set(index, _new).equals(_old);
+        
+        if(index < 0) return false;
+        
+        attributes.set(index, _new);
+        return true;
     }
 
     /**
@@ -79,7 +85,7 @@ public class Header implements Cloneable {
     }
 
     public List<String> getAttributes() {
-        return attributes;
+        return Collections.unmodifiableList(attributes);
     }
 
     ;
@@ -109,6 +115,7 @@ public class Header implements Cloneable {
     
     public Header difference(Header other) {
         List<String> newAtt = new ArrayList<>(attributes);
+        
         newAtt.removeAll(other.attributes);
         
         return new Header(newAtt);

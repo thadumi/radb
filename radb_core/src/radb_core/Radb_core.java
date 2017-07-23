@@ -29,11 +29,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import radb_core.db.StringEvaluator;
-
+import radb_core.db.Content;
+import radb_core.db.Header;
+import radb_core.db.Relation;
 /**
  *
- * @author thadumi
+ * @author Dumitrescu Theodor A.
  */
 public class Radb_core extends Application {
     
