@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import static java.util.stream.Collectors.*;
-import static java.util.stream.IntStream.*;
 
 import java.util.stream.Stream;
 
@@ -72,5 +72,13 @@ public class Content extends HashSet<List<String>>{
             indexes.forEach(i -> tmp.add(row.get(i)));
             return tmp;
         });
+    }
+    
+    public Content intersection(Set< ? extends List<String>> other) {
+        List<List<String>> content = stream().collect(toList());
+        Set<List<String>> tmp = new Content(content);
+        tmp.retainAll(other);
+        
+        return (Content) tmp;
     }
 }
