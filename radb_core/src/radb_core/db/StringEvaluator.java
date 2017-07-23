@@ -26,7 +26,7 @@ import radb_core.util.OptionalConsumer;
  *
  * @author Dumitrescu Theodor A.
  */
-public final class StringEvaluator {
+final class StringEvaluator {
     private StringEvaluator() {
         throw new AssertionError();
     }
