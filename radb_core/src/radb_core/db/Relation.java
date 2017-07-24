@@ -18,17 +18,13 @@ package radb_core.db;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import static java.util.Objects.*;
 import java.util.Set;
-import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import static java.util.stream.Collectors.*;
+import static java.util.stream.IntStream.*;
 import static java.util.stream.Stream.*;
-import javafx.util.Pair;
 
 /**
  * Defines a relation and the operation that can be done with one or more
@@ -117,18 +113,90 @@ public class Relation implements Cloneable {
         return new Relation(header, content);
     }
 
-     public Relation intersection(Relation other) throws RelationalAlgebraException {
-         other = rearrange(other);
-         
-         if(!header.equals(other.header))
-             RelationalAlgebraException.throwError("Unable to perform intersection on relations with different attributes");
-         
-         Header h = new Header(header.getAttributes());
-         Content c = content.intersection(other.content);
-         
-         return new Relation(h, c);
-     }
-     
+    public Relation intersection(Relation other) throws RelationalAlgebraException {
+        other = rearrange(other);
+
+        if (!header.equals(other.header)) {
+            RelationalAlgebraException.throwError("Unable to perform intersection on relations with different attributes");
+        }
+
+        Header h = header.clone();
+        Content c = content.intersection(other.content);
+
+        return new Relation(h, c);
+    }
+
+    public Relation difference(Relation other) throws RelationalAlgebraException {
+        other = rearrange(other);
+
+        if (!header.equals(other.header)) {
+            RelationalAlgebraException.throwError("Unable to perform difference on relations with different attributes");
+        }
+
+        Header newheader = header.clone();
+        Content newContent = content.difference(other.content);
+
+        return new Relation(newheader, newContent);
+    }
+
+    public Relation division(Relation other) throws RelationalAlgebraException {
+        List<String> diffAttributes = header.difference(other.header).getAttributes();
+        Relation projectionOfDiffAtt = projection(diffAttributes);
+
+        Relation tmp = projectionOfDiffAtt.product(other);
+
+        return projectionOfDiffAtt.difference(tmp.difference(this).projection(diffAttributes));
+    }
+
+    public Relation union(Relation other) throws RelationalAlgebraException {
+        other = rearrange(other);
+
+        if (!header.equals(other.header)) {
+            RelationalAlgebraException.throwError("Unable to perform difference on relations with different attributes");
+        }
+
+        return new Relation(header.clone(), content.union(other.content));
+    }
+
+    public Relation join(Relation other, RecordFilter filter) throws RelationalAlgebraException {
+        if (Objects.nonNull(filter)) {
+            return product(other).selection(filter);
+        }
+
+        List<String> sharedAttributes = header.sharedAttributesAsList(other.header);
+
+        List<String> newHeader = header.getAttributes();
+        other.header.getAttributes().stream()
+                .filter(att -> !sharedAttributes.contains(att))
+                .forEach(newHeader::add);
+
+        List<Integer> thisSharedId = getAttributesIndex(sharedAttributes);
+        List<Integer> otherSharedId = other.getAttributesIndex(sharedAttributes);
+
+        List<Integer> otherNotSharedId = range(0, other.numberOfColumns()).boxed()
+                .filter(i -> !otherSharedId.contains(i))
+                .collect(toList());
+
+        List<List<String>> newContent = content.stream().map(i
+                -> other.content.stream()
+                        .filter(j -> {
+                            boolean match = true;
+
+                            for (int k = 0; match && k < sharedAttributes.size(); k++) {
+                                match = match && i.get(thisSharedId.get(k)).equals(j.get(otherSharedId.get(k)));
+                            }
+
+                            return match;
+                        })
+                        .map(j
+                                -> otherNotSharedId.stream().map(l -> j.get(l)).collect(toList()))
+                        .collect(toList()))
+                .flatMap(List::stream)
+                .collect(toList());
+
+        return new Relation(new Header(newHeader), new Content(newContent));
+    }
+
     //relation.operator().sum(other).sum(other).valuate();
     /**
      * Returns a list with numeric index corresponding to field's name
@@ -137,6 +205,10 @@ public class Relation implements Cloneable {
      * @return
      */
     public List<Integer> getAttributesIndex(String... attributes) {
+        return header.getAttributesIndex(attributes);
+    }
+
+    public List<Integer> getAttributesIndex(List<String> attributes) {
         return header.getAttributesIndex(attributes);
     }
 
@@ -158,6 +230,10 @@ public class Relation implements Cloneable {
         } else {
             return null;
         }
+    }
+
+    public int numberOfColumns() {
+        return (int) header.size();
     }
 
     @Override
