@@ -27,9 +27,9 @@ import java.util.stream.Stream;
 
 /**
  *
- * @author thadumi
+ * @author Dumitrescu Theodor A.
  */
-public class Content extends HashSet<List<String>>{
+public class Content extends HashSet<List<String>> implements Cloneable{
     
     public Content(String content) {
         Stream.of(content.split("\n"))
@@ -43,8 +43,8 @@ public class Content extends HashSet<List<String>>{
     public Content() {
         this("");
     }
-    
-    
+        
+
     
     @Override
     public String toString() {
@@ -58,27 +58,40 @@ public class Content extends HashSet<List<String>>{
     }
     
     public Stream<List<String>> getColumns(int ... indexes) {
-        final List<Integer> tmp = new ArrayList<>(indexes.length);
-        for(int i : indexes) tmp.add(i);
-        
-        return getColumns(tmp);
+        return getColumns(Arrays.stream(indexes).boxed().collect(toList()));
     }
     
     public Stream<List<String>> getColumns(List<Integer> indexes) {
-        return stream().map(row -> {
-            final List<String> tmp = new ArrayList<>();
-            //range(0, indexes.size())
-            //         .forEach(i -> tmp.add(row.get(indexes.get(i))));
-            indexes.forEach(i -> tmp.add(row.get(i)));
-            return tmp;
-        });
+        return stream().map(row ->
+            indexes.stream().map(i -> row.get(i))
+                            .collect(toList())
+            );
     }
     
     public Content intersection(Set< ? extends List<String>> other) {
-        List<List<String>> content = stream().collect(toList());
-        Set<List<String>> tmp = new Content(content);
+        Set<List<String>> tmp = clone();
         tmp.retainAll(other);
         
         return (Content) tmp;
     }
+    
+    public Content difference(Set< ? extends List<String>> other) {
+        Set<List<String>> tmp = clone();
+        tmp.removeAll(other);
+        
+        return (Content) tmp;
+    }
+    
+    public Content union(Set<? extends List<String>> other) {
+        Set<List<String>> tmp = clone();
+        tmp.addAll(other);
+        
+        return (Content) tmp;   
+    }
+
+    @Override
+    public Content clone() {
+        return new Content(stream().collect(toList()));
+    }
+    
 }
