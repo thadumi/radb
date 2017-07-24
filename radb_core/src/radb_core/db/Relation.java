@@ -239,7 +239,7 @@ public class Relation implements Cloneable {
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
+    protected Relation clone() {
         return new Relation(name, header.clone(), content.clone());
     }
 
