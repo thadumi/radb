@@ -198,6 +198,8 @@ public class Relation implements Cloneable {
     }
 
     //relation.operator().sum(other).sum(other).valuate();
+    
+    
     /**
      * Returns a list with numeric index corresponding to field's name
      *
@@ -238,7 +240,7 @@ public class Relation implements Cloneable {
 
     @Override
     protected Object clone() throws CloneNotSupportedException {
-        return new Relation(name, header, content);
+        return new Relation(name, header.clone(), content.clone());
     }
 
     @Override
