@@ -22,14 +22,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import static java.util.stream.Collectors.*;
-
+import static radb_core.util.Collections.*;
 import java.util.stream.Stream;
 
-/**
- *
- * @author Dumitrescu Theodor A.
- */
 public class Content extends HashSet<List<String>> implements Cloneable{
+    
+    public static final String EMPTY = "$NULL$";
     
     public Content(String content) {
         Stream.of(content.split("\n"))
@@ -57,11 +55,11 @@ public class Content extends HashSet<List<String>> implements Cloneable{
         return add(Arrays.asList(row.split(", ")));
     }
     
-    public Stream<List<String>> getColumns(int ... indexes) {
-        return getColumns(Arrays.stream(indexes).boxed().collect(toList()));
+    Stream<List<String>> getColumns(int ... indexes) {
+        return getColumns(toList(indexes));
     }
     
-    public Stream<List<String>> getColumns(List<Integer> indexes) {
+    Stream<List<String>> getColumns(List<Integer> indexes) {
         return stream().map(row ->
             indexes.stream().map(i -> row.get(i))
                             .collect(toList())
