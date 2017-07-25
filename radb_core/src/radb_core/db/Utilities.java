@@ -18,6 +18,7 @@ package radb_core.db;
 
 import java.util.List;
 import static java.util.stream.Collectors.*;
+import java.util.stream.Stream;
 /**
  *
  * @author thadumi
@@ -25,16 +26,22 @@ import static java.util.stream.Collectors.*;
 public class Utilities {
     private Utilities() {}
     
-    public static List<Object> cast(List<String> l) {
-        return l.stream()
-                .map(e -> StringEvaluator.cast(e).get() )
+    public static List<Object> cast(Stream<String> l) {
+        return l.map(e -> StringEvaluator.cast(e).get() )
                 .collect(toList());
                 
     }
     
-    public static List<String> toString(List<Object> l) {
-        return l.stream()
-                .map(e -> e.toString())
+    public static List<Object> cast(List<String> l) {
+        return cast(l.stream());
+    }
+    
+    public static List<String> toString(Stream<Object> l) {
+        return l.map(e -> e.toString())
                 .collect(toList());
+    }
+    
+    public static List<String> toString(List<Object> l) {
+        return toString(l.stream());
     }
 }
