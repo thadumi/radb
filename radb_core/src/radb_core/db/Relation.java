@@ -303,6 +303,26 @@ public class Relation implements Cloneable {
         return outerRight(other).union(outerLeft(other));
     }
     
+    public Relation leftThetaJoin(Relation other, RecordFilter filter, boolean swap) {
+        Header newHeader = header.sum(other.header);
+        
+        Content newContet = new Content(
+            content.stream()
+                .map(i -> other.content.stream()
+                        .map(j -> 
+                                filter.test(Utilities.cast( swap ? concat(i.stream(), j.stream()) : concat(i.stream(), j.stream())))
+                                    ? (swap ? concat(i.stream(), j.stream()) : concat(i.stream(), j.stream())).collect(toList())
+                                    : (swap ? concat(i.stream(), range(0, j.size()).mapToObj(k -> Content.EMPTY))
+                                            : concat(range(0, j.size()).mapToObj(k -> Content.EMPTY), i.stream())).collect(toList()))  
+                        .collect(toList()))
+                .flatMap(List::stream)
+                .collect(toList())
+        );
+        
+        return new Relation(newHeader, newContet);
+    }
+    
+    
     
     //relation.operator().sum(other).sum(other).valuate();
     
