@@ -247,15 +247,11 @@ public class Relation implements Cloneable {
 
         List<List<String>> newContent = content.stream()
                 .map(i -> other.content.stream()
-                        .filter(j -> {
-                            boolean match = true;
-
-                            for (int k = 0; match && k < sharedAttributes.size(); k++) {
-                                match = match && i.get(thisSharedId.get(k)).equals(j.get(otherSharedId.get(k)));
-                            }
-
-                            return match;
-                        })
+                        .filter(j -> 
+                                range(0,sharedAttributes.size()).boxed()
+                                    .map(k -> i.get(thisSharedId.get(k)).equals(j.get(otherSharedId.get(k))))
+                                    .reduce(Boolean.TRUE, (r, e) -> r && e)
+                        )
                         .map(j
                                 -> otherNotSharedId.stream().map(l -> j.get(l)).collect(toList()))
                         .collect(toList()))
@@ -264,7 +260,50 @@ public class Relation implements Cloneable {
 
         return new Relation(new Header(newHeader), new Content(newContent));
     }
-
+    
+    
+    public Relation outerLeft(Relation other) {
+        List<String> sharedAttributes = header.sharedAttributesAsList(other.header);
+        
+        List<String> newHeaderAtt = new ArrayList<>(header.getAttributes());
+        
+        other.header.attributes()
+                    .filter(attribute -> !sharedAttributes.contains(attribute))
+                    .forEach(newHeaderAtt::add);
+        
+        Header newHeader = new Header(newHeaderAtt);
+        
+        List<Integer> thisSharedId  = getAttributesIndex(sharedAttributes);
+        List<Integer> otherSharedId = other.getAttributesIndex(sharedAttributes);
+        
+        List<Integer> otherNotSharedId = range(0, other.numberOfColumns()).boxed()
+                                    .filter(i -> !otherSharedId.contains(i))
+                                    .collect(toList());
+        
+        List<List<String>> newContent = content.stream()
+                .map(i -> other.content.stream()
+                        .map(j -> 
+                            range(0,sharedAttributes.size()).boxed()
+                                .map(k -> i.get(thisSharedId.get(k)).equals(j.get(otherSharedId.get(k))))
+                                .reduce(Boolean.TRUE, (r, e) -> r && e)  
+                                    ?   otherNotSharedId.stream().map(l -> j.get(l))
+                                    :   otherNotSharedId.stream().map(l -> Content.EMPTY))
+                        .map( j -> concat(i.stream(), j).collect(toList()))
+                        .collect(toList()))
+                .flatMap(List::stream)
+                .collect(toList());
+        return new Relation(newHeader, new Content(newContent));
+    }
+    
+    public Relation outerRight(Relation other) {
+        return other.outerLeft(this);
+    }
+    
+    public Relation outer(Relation other) throws RelationalAlgebraException {
+        return outerRight(other).union(outerLeft(other));
+    }
+    
+    
     //relation.operator().sum(other).sum(other).valuate();
     
     
@@ -274,11 +313,7 @@ public class Relation implements Cloneable {
      * @param attributes
      * @return
      */
-    public List<Integer> getAttributesIndex(String... attributes) {
-        return header.getAttributesIndex(attributes);
-    }
-
-    public List<Integer> getAttributesIndex(List<String> attributes) {
+   public List<Integer> getAttributesIndex(List<String> attributes) {
         return header.getAttributesIndex(attributes);
     }
 
