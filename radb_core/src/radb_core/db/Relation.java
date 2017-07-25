@@ -322,6 +322,17 @@ public class Relation implements Cloneable {
         return new Relation(newHeader, newContet);
     }
     
+    public Relation leftThetaJoin(Relation other, RecordFilter filter) {
+        return leftThetaJoin(other, filter, false);
+    }
+    
+    public Relation rightThetaJoint(Relation other, RecordFilter filter) {
+        return other.leftThetaJoin(this, filter, true);
+    }
+    
+    public Relation fullThetaJoin(Relation other, RecordFilter filter) throws RelationalAlgebraException {
+        return leftThetaJoin(other, filter).union(rightThetaJoint(other, filter));
+    }
     
     
     //relation.operator().sum(other).sum(other).valuate();
