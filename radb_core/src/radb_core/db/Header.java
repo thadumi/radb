@@ -18,13 +18,13 @@ package radb_core.db;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import static java.util.stream.Collectors.*;
+import java.util.stream.Stream;
 
 /**
  * This class defines the header of a Relation
@@ -46,7 +46,7 @@ public class Header implements Cloneable {
     }
 
     public Header(List<String> attributes) throws IllegalArgumentException {
-        this.attributes = attributes;
+        this.attributes = new ArrayList<>(attributes);
         if (!this.attributes.stream().allMatch(Header::checkName)) {
             throw new IllegalArgumentException("There is some attributes with a not valid attribute name");
         }
@@ -79,16 +79,24 @@ public class Header implements Cloneable {
      * @return
      */
     public long sharedAttributes(Header other) {
+        return sharedAttributesAsList(other).size();
+    }
+    
+    public List<String> sharedAttributesAsList(Header other) {
         return attributes.stream()
                 .filter(att -> other.getAttributes().contains(att))
-                .count();
+                .collect(toList());
+    }
+    
+    public Stream<String> attributes() {
+        return getAttributes().stream();
     }
 
     public List<String> getAttributes() {
         return Collections.unmodifiableList(attributes);
     }
 
-    ;
+    public long size() { return attributes.size(); }
     
     /**
      * Returns a list with numeric index corresponding to field's name
@@ -120,7 +128,8 @@ public class Header implements Cloneable {
         
         return new Header(newAtt);
     }
-
+    
+    
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Header) {
