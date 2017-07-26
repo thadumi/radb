@@ -304,15 +304,15 @@ public class Relation implements Cloneable {
     }
     
     public Relation leftThetaJoin(Relation other, RecordFilter filter, boolean swap) {
-        Header newHeader = header.sum(other.header);
+        Header newHeader = !swap ? header.sum(other.header) : other.header.sum(header);
         
         Content newContet = new Content(
             content.stream()
                 .map(i -> other.content.stream()
                         .map(j -> 
-                                filter.test(Utilities.cast( swap ? concat(i.stream(), j.stream()) : concat(i.stream(), j.stream())))
-                                    ? (swap ? concat(i.stream(), j.stream()) : concat(i.stream(), j.stream())).collect(toList())
-                                    : (swap ? concat(i.stream(), range(0, j.size()).mapToObj(k -> Content.EMPTY))
+                                filter.test(Utilities.cast( !swap ? concat(i.stream(), j.stream()) : concat(i.stream(), j.stream())))
+                                    ? (!swap ? concat(i.stream(), j.stream()) : concat(i.stream(), j.stream())).collect(toList())
+                                    : (!swap ? concat(i.stream(), range(0, j.size()).mapToObj(k -> Content.EMPTY))
                                             : concat(range(0, j.size()).mapToObj(k -> Content.EMPTY), i.stream())).collect(toList()))  
                         .collect(toList()))
                 .flatMap(List::stream)
