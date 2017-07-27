@@ -7,6 +7,7 @@ package radb_core.util;
 
 import java.util.List;
 import static java.util.Arrays.*;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 /**
@@ -28,5 +29,9 @@ public final  class Collections {
     
     public static List<Integer> toList(int[] array) {
         return IntStream.of(array).boxed().collect(Collectors.toList());
+    }
+    
+    public static <T> Set<T> toSet(T[] array) {
+        return stream(array).collect(Collectors.toSet());
     }
 }
