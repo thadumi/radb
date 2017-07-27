@@ -106,9 +106,9 @@ public class Relation implements Cloneable {
         Content newC = Content.emptyContent();
 
         this.content.stream()
-                .map(Utilities::cast) //cast each string value of the record in an aproprieted type
+                .map(Caster::cast) //cast each string value of the record in an aproprieted type
                 .filter(filter) //applay the filter to the records
-                .map(Utilities::toString) //recast the records back into a record of strings
+                .map(Caster::toString) //recast the records back into a record of strings
                 .forEach(newC::add); //store the records into a new collection
 
         return of(name, header.clone(), newC);
@@ -330,7 +330,7 @@ public class Relation implements Cloneable {
             content.stream()
                 .map(i -> other.content.stream()
                         .map(j -> 
-                                filter.test(Utilities.cast( !swap ? concat(i.stream(), j.stream()) : concat(i.stream(), j.stream())))
+                                filter.test(Caster.cast( !swap ? concat(i.stream(), j.stream()) : concat(i.stream(), j.stream())))
                                     ? (!swap ? concat(i.stream(), j.stream()) : concat(i.stream(), j.stream())).collect(toList())
                                     : (!swap ? concat(i.stream(), range(0, j.size()).mapToObj(k -> Content.EMPTY))
                                             : concat(range(0, j.size()).mapToObj(k -> Content.EMPTY), i.stream())).collect(toList()))  
@@ -403,6 +403,27 @@ public class Relation implements Cloneable {
         return "----------Table" + (name == null || name.isEmpty() ? "unamed" : name) + "----------\n"  
                + header.toString() + "\n" 
                + content.toString();
+    }
+    
+    static final class Caster {
+        public static List<Object> cast(Stream<String> l) {
+            return l.map(e -> StringEvaluator.cast(e).get() )
+                    .collect(toList());
+                
+        }
+
+        public static List<Object> cast(List<String> l) {
+            return cast(l.stream());
+        }
+
+        public static List<String> toString(Stream<Object> l) {
+            return l.map(e -> e.toString())
+                    .collect(toList());
+        }
+
+        public static List<String> toString(List<Object> l) {
+            return toString(l.stream());
+        }
     }
 
 }
