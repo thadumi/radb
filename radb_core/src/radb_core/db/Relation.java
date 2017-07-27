@@ -20,14 +20,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import static java.util.Objects.*;
+//import static java.util.Objects.*;
 import java.util.Set;
 import java.util.function.Predicate;
 import static java.util.stream.Collectors.*;
 import static java.util.stream.IntStream.*;
 import java.util.stream.Stream;
 import static java.util.stream.Stream.*;
+
 import static radb_core.util.Collections.*;
+import static radb_core.util.Checker.*;
 
 /**
  * Defines a relation and the operation that can be done with one or more
@@ -46,8 +48,8 @@ public class Relation implements Cloneable {
      * @param header relation's header, it can't be null and can't be changed, 
      * @param content relation's content
      */
-    public Relation(String name, Header header, Content content) {
-        this.name = name;
+    Relation(String name, Header header, Content content) {
+        this.name = Objects.isNull(name) ? "unnamed" : name;
         this.header = requireNonNull(header, "The header can't be null");
         this.content = requireNonNull(content, "The content can't be null");
     }
@@ -58,7 +60,25 @@ public class Relation implements Cloneable {
      * @param content 
      */
     public Relation(Header header, Content content) {
-        this("unnamed", header, content);
+        this(null, header, content);
+    }
+    
+    
+    public static Relation of(String name, Header header, Content content) {
+        return new Relation(name, header, content);
+    }
+    
+    public static Relation of(Header header, Content content) {
+        return of(null, header, content);
+    }
+    
+    public static Relation of(String name, 
+            List<String> headerAttributes,
+            List<List<String>> records) {
+        
+        return new Relation(name, 
+                            Header.of(headerAttributes), 
+                            Content.of(records));
     }
     
     public Stream<List<String>> toRecords() {
@@ -83,7 +103,7 @@ public class Relation implements Cloneable {
      * @return a new relation that contains the resul
      */
     public Relation selection(RecordFilter filter) {
-        Content newC = new Content();
+        Content newC = Content.emptyContent();
 
         this.content.stream()
                 .map(Utilities::cast) //cast each string value of the record in an aproprieted type
@@ -91,7 +111,7 @@ public class Relation implements Cloneable {
                 .map(Utilities::toString) //recast the records back into a record of strings
                 .forEach(newC::add); //store the records into a new collection
 
-        return new Relation(name, header.clone(), newC);
+        return of(name, header.clone(), newC);
     }
 
     /**
@@ -113,7 +133,7 @@ public class Relation implements Cloneable {
                         concat(i.stream(), j.stream()).collect(toList()))
         ));
 
-        return new Relation(header.sum(other.header), new Content(content));
+        return of(header.sum(other.header), Content.of(content));
     }
     
     /**
@@ -136,15 +156,15 @@ public class Relation implements Cloneable {
             RelationalAlgebraException.throwError("Invalid attributes for projection");
         }
 
-        Header newHeader = new Header(ids.stream().map(i -> header.getAttributes().get(i)).collect(toList()));
+        Header newHeader = Header.of(ids.stream().map(i -> header.getAttributes().get(i)).collect(toList()));
 
-        Content newContent = new Content();
+        Content newContent = Content.emptyContent();
         content.stream()
                 .map(row
                         -> ids.stream().map(i -> row.get(i)).collect(toList()))
                 .forEach(newContent::add);
         
-        return new Relation(newHeader, newContent);
+        return of(newHeader, newContent);
     }
     
     /**
@@ -163,7 +183,7 @@ public class Relation implements Cloneable {
         Header newHeader = header.clone();
         Content newContent = content.intersection(other.content);
 
-        return new Relation(newHeader, newContent);
+        return of(newHeader, newContent);
     }
     
     /**
@@ -184,7 +204,7 @@ public class Relation implements Cloneable {
         Header newheader = header.clone();
         Content newContent = content.difference(other.content);
 
-        return new Relation(newheader, newContent);
+        return of(newheader, newContent);
     }
 
     /**
@@ -212,7 +232,7 @@ public class Relation implements Cloneable {
      * and second operands.
      * @param other the second operand
      * @return a new relation that represents the result
-     * @throws RelationalAlgebraException if the headers are diffrent. 
+     * @throws RelationalAlgebraException if the headers are different. 
      *                                    It's possible to use projection and rename
      *                                   operations to make headers match
      */
@@ -223,7 +243,7 @@ public class Relation implements Cloneable {
             RelationalAlgebraException.throwError("Unable to perform difference on relations with different attributes");
         }
 
-        return new Relation(header.clone(), content.union(other.content));
+        return of(header.clone(), content.union(other.content));
     }
     
     public Relation join(Relation other, RecordFilter filter) throws RelationalAlgebraException {
@@ -258,7 +278,7 @@ public class Relation implements Cloneable {
                 .flatMap(List::stream)
                 .collect(toList());
 
-        return new Relation(new Header(newHeader), new Content(newContent));
+        return of(Header.of(newHeader), Content.of(newContent));
     }
     
     
@@ -271,7 +291,7 @@ public class Relation implements Cloneable {
                     .filter(attribute -> !sharedAttributes.contains(attribute))
                     .forEach(newHeaderAtt::add);
         
-        Header newHeader = new Header(newHeaderAtt);
+        Header newHeader = Header.of(newHeaderAtt);
         
         List<Integer> thisSharedId  = getAttributesIndex(sharedAttributes);
         List<Integer> otherSharedId = other.getAttributesIndex(sharedAttributes);
@@ -280,19 +300,19 @@ public class Relation implements Cloneable {
                                     .filter(i -> !otherSharedId.contains(i))
                                     .collect(toList());
         
-        List<List<String>> newContent = content.stream()
-                .map(i -> other.content.stream()
+        List<List<String>> newContent = content.stream()   //foreach thisRecord in content
+                .map(i -> other.content.stream()           // foreach otherRecord in other.content
                         .map(j -> 
-                            range(0,sharedAttributes.size()).boxed()
-                                .map(k -> i.get(thisSharedId.get(k)).equals(j.get(otherSharedId.get(k))))
-                                .reduce(Boolean.TRUE, (r, e) -> r && e)  
-                                    ?   otherNotSharedId.stream().map(l -> j.get(l))
-                                    :   otherNotSharedId.stream().map(l -> Content.EMPTY))
-                        .map( j -> concat(i.stream(), j).collect(toList()))
-                        .collect(toList()))
-                .flatMap(List::stream)
-                .collect(toList());
-        return new Relation(newHeader, new Content(newContent));
+                            range(0,sharedAttributes.size()).boxed() //  foreach atrribute in sharedAttributes
+                                .map(k -> i.get(thisSharedId.get(k)).equals(j.get(otherSharedId.get(k)))) //  check if thisRecord[attribute] == otherRecord[attribute]
+                                .reduce(Boolean.TRUE, (r, e) -> r && e)  //  if
+                                    ?   otherNotSharedId.stream().map(l -> j.get(l)) // all values are equal then create a list with the sharedAttributes' values of the otherRecord
+                                    :   otherNotSharedId.stream().map(l -> Content.EMPTY)) // otherwaise create a list of empty field foreach shared attribute
+                        .map( j -> concat(i.stream(), j).collect(toList())) //then concatenate thisRecord with the list created
+                        .collect(toList())) // and save all the list in a new list as box
+                .flatMap(List::stream) //take out all the list form each box
+                .collect(toList()); // save all the list in a new list that will contain all the list
+        return of(newHeader, Content.of(newContent));
     }
     
     public Relation outerRight(Relation other) {
@@ -306,7 +326,7 @@ public class Relation implements Cloneable {
     public Relation leftThetaJoin(Relation other, RecordFilter filter, boolean swap) {
         Header newHeader = !swap ? header.sum(other.header) : other.header.sum(header);
         
-        Content newContet = new Content(
+        Content newContet = Content.of(
             content.stream()
                 .map(i -> other.content.stream()
                         .map(j -> 
@@ -319,7 +339,7 @@ public class Relation implements Cloneable {
                 .collect(toList())
         );
         
-        return new Relation(newHeader, newContet);
+        return of(newHeader, newContet);
     }
     
     public Relation leftThetaJoin(Relation other, RecordFilter filter) {
@@ -334,6 +354,7 @@ public class Relation implements Cloneable {
         return leftThetaJoin(other, filter).union(rightThetaJoint(other, filter));
     }
     
+    //TOOD: update, insert, delete
     
     //relation.operator().sum(other).sum(other).valuate();
     
@@ -374,12 +395,14 @@ public class Relation implements Cloneable {
 
     @Override
     protected Relation clone() {
-        return new Relation(name, header.clone(), content.clone());
+        return of(name, header.clone(), content.clone());
     }
 
     @Override
     public String toString() {
-        return header.toString() + "\n" + content.toString();
+        return "----------Table" + (name == null || name.isEmpty() ? "unamed" : name) + "----------\n"  
+               + header.toString() + "\n" 
+               + content.toString();
     }
 
 }
