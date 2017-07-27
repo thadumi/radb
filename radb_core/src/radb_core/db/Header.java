@@ -18,6 +18,7 @@ package radb_core.db;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -25,6 +26,9 @@ import java.util.Objects;
 import java.util.Set;
 import static java.util.stream.Collectors.*;
 import java.util.stream.Stream;
+
+
+import static radb_core.util.Checker.*;
 
 /**
  * This class defines the header of a Relation
@@ -41,19 +45,32 @@ public class Header implements Cloneable {
 
     private final List<String> attributes;
 
-    public Header(String... attributes) throws IllegalArgumentException {
-        this(Arrays.asList(attributes));
-    }
-
-    public Header(List<String> attributes) throws IllegalArgumentException {
+    Header(Collection<String> attributes) throws IllegalArgumentException {
         this.attributes = new ArrayList<>(attributes);
+        
         if (!this.attributes.stream().allMatch(Header::checkName)) {
             throw new IllegalArgumentException("There is some attributes with a not valid attribute name");
         }
     }
-
-    public Header(String attributes) throws IllegalArgumentException {
-        this(attributes.split(", "));
+    
+    public static Header of(List<String> attributes) {
+        requireNonNull(attributes, "");
+        throwIf(attributes, Collection::isEmpty);
+        
+        return new Header(new LinkedHashSet<>(attributes));
+    }
+    
+    public static Header of(String ... attributes) {
+        throwIf(attributes, arg -> arg.length < 1);
+        
+        return Header.of(Arrays.asList(attributes));
+    }
+    
+    public static Header of(String attributes) {
+        requireNonNull(attributes, "attributes can't be null");
+        throwIf(attributes, arg -> arg.length() < 1);
+        
+        return Header.of(attributes.split(", "));
     }
 
     /**
