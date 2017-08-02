@@ -18,13 +18,14 @@ package radb_core.util;
 
 /**
  *
- * @author thadumi
+ * @author Dumitrescu Theodor A.
+ * @param <U>
  */
 public interface Supplier<U> extends Action<Void, U>, java.util.function.Supplier<U>{
 
     @Override
-    public default U get() {
-        return execut(null);
+    public default U execut(Void v) {
+        return get();
     }
     
 }
