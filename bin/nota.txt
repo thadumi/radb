@@ -1,0 +1,4 @@
+1) Attivare QtCreator caricando il file \gui\maingui.ui per modificare la gui
+2) doppio clic su COMPY.BAT per compilare tutto
+
+[13 giu 16]

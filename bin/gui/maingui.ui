@@ -1,0 +1,1622 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <author>Luigino Calvi</author>
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1041</width>
+    <height>551</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>100</width>
+    <height>200</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>RAEE</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QGroupBox" name="groupBox_4">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>380</y>
+      <width>611</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QPushButton" name="cmdOuterRight">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>100</y>
+       <width>41</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="toolTip">
+      <string>Right outer join</string>
+     </property>
+     <property name="text">
+      <string>⟖</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdDifference">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>60</y>
+       <width>41</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="toolTip">
+      <string>Difference</string>
+     </property>
+     <property name="text">
+      <string>∸</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdProduct">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>60</y>
+       <width>41</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="toolTip">
+      <string>Product</string>
+     </property>
+     <property name="text">
+      <string>⨯</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdOuterLeft">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>100</y>
+       <width>41</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="toolTip">
+      <string>Left outer join</string>
+     </property>
+     <property name="text">
+      <string>⟕</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdJoin">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>100</y>
+       <width>41</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="toolTip">
+      <string>Natural join</string>
+     </property>
+     <property name="text">
+      <string>⨝</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdProjection">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>41</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="toolTip">
+      <string>Projection</string>
+     </property>
+     <property name="text">
+      <string>π</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdRename">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>20</y>
+       <width>41</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="toolTip">
+      <string>Rename</string>
+     </property>
+     <property name="text">
+      <string>ρ</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdSelection">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>20</y>
+       <width>41</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="toolTip">
+      <string>Selection</string>
+     </property>
+     <property name="text">
+      <string>σ</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdDivision">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>60</y>
+       <width>41</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="toolTip">
+      <string>Division</string>
+     </property>
+     <property name="text">
+      <string>÷</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdIntersection">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>60</y>
+       <width>41</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="toolTip">
+      <string>Intersection</string>
+     </property>
+     <property name="text">
+      <string>∩</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdUnion">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>60</y>
+       <width>41</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="toolTip">
+      <string>Union</string>
+     </property>
+     <property name="text">
+      <string>∪</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdOuter">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>100</y>
+       <width>41</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="toolTip">
+      <string>Full outer join</string>
+     </property>
+     <property name="text">
+      <string>⟗</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdArrow">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>20</y>
+       <width>41</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="toolTip">
+      <string>Change attribute name</string>
+     </property>
+     <property name="text">
+      <string>→</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdArrow_2">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>100</y>
+       <width>41</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="toolTip">
+      <string>Assign</string>
+     </property>
+     <property name="text">
+      <string>←</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdArrow_3">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>20</y>
+       <width>41</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="toolTip">
+      <string>Less Equal</string>
+     </property>
+     <property name="text">
+      <string>≤</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdArrow_4">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>20</y>
+       <width>41</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="toolTip">
+      <string>Not Equal</string>
+     </property>
+     <property name="text">
+      <string>≠</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdArrow_5">
+     <property name="geometry">
+      <rect>
+       <x>360</x>
+       <y>20</y>
+       <width>41</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="toolTip">
+      <string>Greater Equal</string>
+     </property>
+     <property name="text">
+      <string>≥</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdArrow_6">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>60</y>
+       <width>41</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="toolTip">
+      <string>And</string>
+     </property>
+     <property name="text">
+      <string>∧</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdArrow_7">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>60</y>
+       <width>41</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="toolTip">
+      <string>Or</string>
+     </property>
+     <property name="text">
+      <string>∨</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdArrow_8">
+     <property name="geometry">
+      <rect>
+       <x>360</x>
+       <y>60</y>
+       <width>41</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="toolTip">
+      <string>Not</string>
+     </property>
+     <property name="text">
+      <string>¬</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdArrow_9">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>20</y>
+       <width>41</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cambria</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Predicate&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>⦇⦈</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdExecute">
+     <property name="geometry">
+      <rect>
+       <x>470</x>
+       <y>20</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 10pt &quot;Arial&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Executex</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QSplitter" name="splitter">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>340</y>
+      <width>201</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>100</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>201</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="title">
+      <string>Relations</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QListWidget" name="lstRelations">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>50</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(255, 217, 207);</string>
+        </property>
+        <property name="sortingEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_3">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>641</width>
+      <height>341</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>800</width>
+      <height>16777215</height>
+     </size>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QLabel" name="label_FileName">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">selection-background-color: rgb(255, 255, 127);</string>
+       </property>
+       <property name="text">
+        <string>unamed</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPlainTextEdit" name="SorgenteProgramma">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Cambria</family>
+         <pointsize>12</pointsize>
+         <strikeout>false</strikeout>
+         <kerning>true</kerning>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 180);</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_5">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>340</y>
+      <width>201</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="title">
+     <string>Attributes</string>
+    </property>
+    <widget class="QListWidget" name="lstAttributes">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>26</y>
+       <width>181</width>
+       <height>153</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>73</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(207, 207, 255);</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLineEdit" name="messaggioErrore">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>340</y>
+      <width>621</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Cambria</family>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 0, 0);
+font: 12pt &quot;Cambria&quot;;</string>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>0</y>
+      <width>401</width>
+      <height>341</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QTreeWidget" name="table">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>381</width>
+       <height>301</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>200</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="sizeIncrement">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 10pt &quot;Arial&quot;;
+background-color: rgb(200, 255, 255);</string>
+     </property>
+     <property name="rootIsDecorated">
+      <bool>false</bool>
+     </property>
+     <attribute name="headerMinimumSectionSize">
+      <number>27</number>
+     </attribute>
+     <column>
+      <property name="text">
+       <string notr="true">Empty relation</string>
+      </property>
+     </column>
+    </widget>
+    <widget class="QLabel" name="label_RelationName">
+     <property name="geometry">
+      <rect>
+       <x>11</x>
+       <y>4</y>
+       <width>371</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>10</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 10pt &quot;Arial&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Relazione vuota</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1041</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="separator"/>
+    <addaction name="action_New_file"/>
+    <addaction name="action_Load_file"/>
+    <addaction name="action_Save_file"/>
+    <addaction name="action_Save_file_as"/>
+    <addaction name="separator"/>
+    <addaction name="action_Quit"/>
+    <addaction name="separator"/>
+   </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <action name=""/>
+    <addaction name="actionAbout"/>
+   </widget>
+   <widget class="QMenu" name="menuRelations">
+    <property name="title">
+     <string>Relations</string>
+    </property>
+    <addaction name="actionNew_relation"/>
+    <addaction name="action_Load_relation"/>
+    <addaction name="action_Save_relation"/>
+    <addaction name="actionEdit_relation"/>
+    <addaction name="actionUnload_relation"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuRelations"/>
+   <addaction name="menuAbout"/>
+  </widget>
+  <action name="actionAbout">
+   <property name="text">
+    <string>&amp;About</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::AboutRole</enum>
+   </property>
+  </action>
+  <action name="action_Load_relation">
+   <property name="text">
+    <string>&amp;Load relation</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="action_Save_relation">
+   <property name="text">
+    <string>&amp;Save relation</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="action_Quit">
+   <property name="text">
+    <string>&amp;Quit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::QuitRole</enum>
+   </property>
+  </action>
+  <action name="actionCheck_for_new_versions">
+   <property name="text">
+    <string>Check for new versions</string>
+   </property>
+  </action>
+  <action name="actionNew_relation">
+   <property name="text">
+    <string>New relation</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionEdit_relation">
+   <property name="text">
+    <string>Edit relation</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
+   </property>
+  </action>
+  <action name="actionNew_session">
+   <property name="text">
+    <string>New session</string>
+   </property>
+  </action>
+  <action name="actionSave_session_as">
+   <property name="text">
+    <string>Save session as</string>
+   </property>
+   <property name="toolTip">
+    <string>Save session as</string>
+   </property>
+  </action>
+  <action name="actionManage_sessions">
+   <property name="text">
+    <string>Manage sessions</string>
+   </property>
+  </action>
+  <action name="actionUnload_relation">
+   <property name="text">
+    <string>Unload relation</string>
+   </property>
+  </action>
+  <action name="action_Load_file">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="action_Save_file_as">
+   <property name="text">
+    <string>Save as ..</string>
+   </property>
+  </action>
+  <action name="action_Save_file">
+   <property name="text">
+    <string>Save </string>
+   </property>
+  </action>
+  <action name="actionEdit_relation_2">
+   <property name="text">
+    <string>Edit relation</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
+   </property>
+  </action>
+  <action name="action_New_file">
+   <property name="text">
+    <string>New</string>
+   </property>
+  </action>
+ </widget>
+ <tabstops>
+  <tabstop>cmdDifference</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>cmdExecute</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>execute()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>490</x>
+     <y>421</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>592</x>
+     <y>506</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lstRelations</sender>
+   <signal>itemDoubleClicked(QListWidgetItem*)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>printRelation(QListWidgetItem*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>810</x>
+     <y>411</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>506</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lstRelations</sender>
+   <signal>itemClicked(QListWidgetItem*)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>showAttributes(QListWidgetItem*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>810</x>
+     <y>411</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>510</x>
+     <y>506</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionAbout</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>showAbout()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>305</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_Load_relation</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>loadRelation()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>305</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_Save_relation</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>saveRelation()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>305</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_Quit</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>305</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionEdit_relation</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>editRelation()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>305</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionNew_relation</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>newRelation()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>305</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionUnload_relation</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>unloadRelation()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>305</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdIntersection</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>addIntersection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>110</x>
+     <y>501</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>228</x>
+     <y>506</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdUnion</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>addUnion()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>70</x>
+     <y>501</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>279</x>
+     <y>506</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdProduct</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>addProduct()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>190</x>
+     <y>501</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>180</x>
+     <y>506</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdDifference</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>addDifference()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>150</x>
+     <y>501</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>46</x>
+     <y>506</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdArrow</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>addArrow()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>190</x>
+     <y>461</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>58</x>
+     <y>506</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdRename</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>addRename()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>150</x>
+     <y>461</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>111</x>
+     <y>506</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdSelection</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>addSelection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>110</x>
+     <y>461</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>16</x>
+     <y>506</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdProjection</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>addProjection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>70</x>
+     <y>461</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>91</x>
+     <y>506</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdOuterLeft</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>addOLeft()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>110</x>
+     <y>541</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>66</x>
+     <y>506</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdOuter</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>addOuter()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>190</x>
+     <y>541</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>86</x>
+     <y>506</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdOuterRight</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>addORight()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>150</x>
+     <y>541</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>58</x>
+     <y>506</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdJoin</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>addJoin()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>70</x>
+     <y>541</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>147</x>
+     <y>506</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdDivision</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>addDivision()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>230</x>
+     <y>501</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>185</x>
+     <y>506</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_Save_file</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>saveFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>414</x>
+     <y>305</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_Save_file_as</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>saveFileAs()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>414</x>
+     <y>305</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_Load_file</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>loadFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>414</x>
+     <y>305</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdArrow_2</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>addAssign()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>230</x>
+     <y>541</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>531</x>
+     <y>445</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdArrow_3</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>addLessEqual()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>340</x>
+     <y>461</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>645</x>
+     <y>383</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdArrow_4</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>addNotEqual()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>380</x>
+     <y>461</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>671</x>
+     <y>405</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdArrow_5</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>addGreaterEqual()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>420</x>
+     <y>461</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>658</x>
+     <y>434</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdArrow_6</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>addAnd()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>340</x>
+     <y>501</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>461</x>
+     <y>544</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdArrow_8</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>addNot()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>420</x>
+     <y>501</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>547</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdArrow_7</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>addOr()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>380</x>
+     <y>501</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>574</x>
+     <y>554</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdArrow_9</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>addAttr()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>230</x>
+     <y>451</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>370</x>
+     <y>572</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_New_file</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>newFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>513</x>
+     <y>302</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdExecute</sender>
+   <signal>pressed()</signal>
+   <receiver>messaggioErrore</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>550</x>
+     <y>424</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>550</x>
+     <y>388</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>execute()</slot>
+  <slot>checkVersion()</slot>
+  <slot>showAbout()</slot>
+  <slot>showSurvey()</slot>
+  <slot>addProduct()</slot>
+  <slot>addDifference()</slot>
+  <slot>addUnion()</slot>
+  <slot>addIntersection()</slot>
+  <slot>addDivision()</slot>
+  <slot>addOLeft()</slot>
+  <slot>addORight()</slot>
+  <slot>addOuter()</slot>
+  <slot>addJoin()</slot>
+  <slot>addProjection()</slot>
+  <slot>addSelection()</slot>
+  <slot>addRename()</slot>
+  <slot>addArrow()</slot>
+  <slot>optimize()</slot>
+  <slot>undoOptimize()</slot>
+  <slot>loadRelation()</slot>
+  <slot>unloadRelation()</slot>
+  <slot>saveRelation()</slot>
+  <slot>insertTuple()</slot>
+  <slot>deleteTuple()</slot>
+  <slot>printRelation(QListWidgetItem*)</slot>
+  <slot>showAttributes(QListWidgetItem*)</slot>
+  <slot>loadQuery()</slot>
+  <slot>resumeHistory(QListWidgetItem*)</slot>
+  <slot>editRelation()</slot>
+  <slot>newRelation()</slot>
+  <slot>newSession()</slot>
+  <slot>saveSessionAs()</slot>
+  <slot>manageSessions()</slot>
+  <slot>saveFile()</slot>
+  <slot>saveFileAs()</slot>
+  <slot>loadFile()</slot>
+  <slot>addSimboliDiProva()</slot>
+  <slot>addAssign()</slot>
+  <slot>addSymbol(1)</slot>
+  <slot>slot1()</slot>
+  <slot>addLessEqual()</slot>
+  <slot>addGreaterEqual()</slot>
+  <slot>addNotEqual()</slot>
+  <slot>addAnd()</slot>
+  <slot>addNot()</slot>
+  <slot>addOr()</slot>
+  <slot>testEspressione()</slot>
+  <slot>addAttr()</slot>
+  <slot>slot3()</slot>
+  <slot>newFile()</slot>
+  <slot>slot4()</slot>
+ </slots>
+</ui>
